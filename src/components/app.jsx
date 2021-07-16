@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Song from './musicTable/musictable';
 import axios from 'axios'
 
 
@@ -17,19 +16,31 @@ class App extends Component{
 
 
     render(){
-        return(
-            <div>React App
-                {console.log(this.state.songs)}
-            </div>
-
-
-
-
-        )
-
-
+        return ( 
+            <table>
+                <thead>
+                  <tr>
+                    <th>Head</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {this.state.songs.map((song) => {
+                    return(
+                      <tr>
+                        <td>{song.title}</td>
+                        <td>{song.artist}</td>
+                        <td>{song.album}</td>
+                        <td>{song.release_date}</td>
+                      </tr>
+                    )
+                  })}
+                  
+                </tbody>
+            </table>
+           );
+        }
     }
-}
+
 export default App;
 
 
