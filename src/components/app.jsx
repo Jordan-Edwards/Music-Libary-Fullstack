@@ -1,12 +1,23 @@
 import React, { Component } from "react";
+<<<<<<< HEAD
+=======
+// import Song from './musicTable/musictable';
+>>>>>>> 13bfb6ea15da9569ac1eb45aa28168b8c37917aa
 import axios from 'axios'
 
 
 class App extends Component{
-    state = {
-        songs:[]
+    constructor(props){
+        super(props);
+        this.state = {
+            songs:[ 
+            {title:''},
+            {artist:''},
+            {album:''},   
+            {release_date:null},
+            ]
+        }
     }
-
     componentDidMount(){
         axios.get('http://127.0.0.1:8000/music/').then(response => 
         this.setState({
@@ -16,6 +27,7 @@ class App extends Component{
 
 
     render(){
+<<<<<<< HEAD
         return ( 
             <table>
                 <thead>
@@ -41,6 +53,37 @@ class App extends Component{
         }
     }
 
+=======
+        return(
+          <div>              
+                  return(
+                      <table>
+                          <thead>
+                              <tr>
+                                  <th>
+                                      Head
+                                  </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              {this.state.songs.map((songs) =>{
+                                  return(
+                                      <tr>
+                                            <td>{songs.title}</td>
+                                            <td>{songs.artist}</td>
+                                            <td>{songs.album}</td>
+                                            <td>{songs.release_date}</td>
+                                      </tr>
+                                  )
+                              } )}
+                          </tbody>
+                      </table>
+                  )  
+          </div>
+           )
+        }
+    }
+>>>>>>> 13bfb6ea15da9569ac1eb45aa28168b8c37917aa
 export default App;
 
 
