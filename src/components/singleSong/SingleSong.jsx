@@ -1,10 +1,10 @@
 import React from "react";
 
-function MusicTable(props) {
+function SingleSongTable(props) {
   return (
     <tbody>
-      {console.log("MusicTable props", props)}
-      {props.songs.map((song) => {
+      {console.log("SingleSongTable props", props)}
+      {props.songs.map((song, id) => {
         return (
           <tr>
             <td>{song.id}</td>
