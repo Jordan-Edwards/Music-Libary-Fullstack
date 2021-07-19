@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+
+
 class SongMaker extends Component {
   constructor(props) {
     super(props);
@@ -13,9 +15,12 @@ class SongMaker extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value });
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   };
-  handleSubmit(event) {
+
+  handleSubmit = (event) => {
     event.preventDefault();
     const song = {
       title: this.state.title,
@@ -26,14 +31,19 @@ class SongMaker extends Component {
     };
     console.log(song);
     this.props.addSong(song);
-    this.setState({
-      title: this.state.title,
-      artist: this.state.artist,
-      album: this.state.album,
-      release_date: this.state.release_date,
-      genre: this.state.genre,
-    });
-  }
+    this.setState(
+      {
+      newTitle: this.state.newTitle,
+      newArtist: this.state.newArtist,
+      newAlbum: this.state.newAlbum,
+      newRelease_date: this.state.newRelease_date,
+      newGenre: this.state.newGenre,
+    },
+    console.log(this)
+    
+    );
+    
+  };
   render() {
     return (
       <div>
@@ -42,8 +52,8 @@ class SongMaker extends Component {
           <center>
             <h3>Add a New Song!!!</h3>
           </center>
-          <form onSubmit={this.handleSubmit}>
-            <div className="container">
+          
+            <div onSubmit={this.handleSubmit} className="container">
               <div className="row col-align">
                 <div className="form-group">
                   <div className="col-md-4">
@@ -103,7 +113,7 @@ class SongMaker extends Component {
                 </div>
               </div>
             </div>
-          </form>
+          
         </React.Fragment>
       </div>
     );

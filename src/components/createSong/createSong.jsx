@@ -6,7 +6,7 @@ const CreateSong = ({onAdd}) => {
   const [title, setTitle] = useState("")
   const [artist, setArtist] = useState("")
   const [album, setAlbum] = useState("")
-  const [release_date, setRelease_date] = useState(null);
+  const [release_date, setRelease_date] = useState('');
   const [genre, setGenre] = useState("")
 
 const onSubmit = (e)=>{
@@ -15,7 +15,7 @@ const onSubmit = (e)=>{
     alert('Please try again')
     return
   }
-  debugger
+  
   onAdd({title, artist, album, release_date, genre})
   setTitle('')
   setArtist('')

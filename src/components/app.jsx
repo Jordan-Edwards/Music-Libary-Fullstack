@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import MusicTable from "./musicTable/musictable";
 import axios from "axios";
 import "./app.css";
-import SongMaker from "./createSong/songMaker";
-
+import SongMaker from "./createSong/SongMaker";
+import SearchBar from './searchBar/SearchBar'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -49,9 +49,23 @@ class App extends Component {
     );
   }
 
-  // Add Song
-  addSong = (e) => {
-    axios.post("http://127.0.0.1:8000/music/", this.song).then((response) =>
+  // // Add Song
+  // addSong = (song) => {
+  //   console.log(song);
+  //   console.log(this.state.songs);
+  //   axios.post(`http://127.0.0.1:8000/music/`, song);
+  //   this.setState({
+  //     songs: [...this.state.songs, song],
+  //     title: "",
+  //     album: "",
+  //     artist: "",
+  //     release_date: "",
+  //     genre: "",
+  //   });
+  // };
+  // AddSong
+  addSong = (data) => {
+    axios.post("http://127.0.0.1:8000/music/", data).then((response) =>
       this.setState({
         songs: response.data,
       })
@@ -81,8 +95,9 @@ class App extends Component {
         </table>
         <div>
           <form>
-            <SongMaker onAdd={this.addSong} />
+            <SongMaker onAdd={this.addSong(this.state.songs)} />
           </form>
+          <div><SearchBar/></div>
         </div>
       </div>
     );
