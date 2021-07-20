@@ -16,79 +16,40 @@ class App extends Component {
         { genre: "" },
       ],
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    const song = {
-      title: this.state.title,
-      artist: this.state.artist,
-      album: this.state.album,
-      release_date: this.state.release_date,
-      genre: this.state.genre,
-    };
-    this.props.addNewSong(song);
-    this.setState({
-      title: "",
-      artist: "",
-      album: "",
-      relese_date: "",
-      genre: "",
-    });
-  }
 
   componentDidMount() {
+    this.getAllSongs()
+  }
+  
+  getAllSongs= async ()=>{
     axios.get("http://127.0.0.1:8000/music/").then((response) =>
-      this.setState({
-        songs: response.data,
-      })
-    );
-  }
-  deleteSong(songId){
-    return axios.delete("http://127.0.0.1:8000/music/"  + songId);
-}
-   delete = (id) => {
-    axios.delete(`http://127.0.0.1:8000/music/${id}/`)        
-      .then(response => {
-      console.log(response);
-      console.log(response.data);      
+    this.setState({
+      songs: response.data,
     })
-    console.log(this)
-    this.setState({})
+  );
   }
-  // // Add Song
-  // addSong = (song) => {
-  //   console.log(song);
-  //   console.log(this.state.songs);
-  //   axios.post(`http://127.0.0.1:8000/music/`, song);
-  //   this.setState({
-  //     songs: [...this.state.songs, song],
-  //     title: "",
-  //     album: "",
-  //     artist: "",
-  //     release_date: "",
-  //     genre: "",
-  //   });
-  // };
-  // AddSong
+  //delete button added / not yet functional//
+
+
+
+
+
+// ^^^^TypeError: props.delete is not a function//
+
+
   addSong = (data) => {
+    console.log(data)
     axios.post("http://127.0.0.1:8000/music/", data).then((response) =>
-      this.setState({
-        songs: response.data,
-      })
+      this.getAllSongs()
     );
   };
 
   //Delete Song
-  // const deleteSong= (id)=>{
-  //   this.setState(songs.filter((song) => song.id !== id))
-  // }
+  deleteSong= (id)=>{
+   axios.delete("http://127.0.0.1:8000/music/" + id + "/")
+  }
   render() {
     return (
       <div>
@@ -103,12 +64,12 @@ class App extends Component {
               <th>Genre</th>
             </tr>
           </thead>
-          <MusicTable songs={this.state.songs} />
+          <MusicTable songs={this.state.songs} deleteSong = {this.deleteSong}/>
         </table>
         <div>
-          <form>
-            <SongMaker onAdd={this.addSong(this.state.songs)} />
-          </form>
+          
+            <SongMaker onAdd={this.addSong} />
+         
           <div><SearchBar/></div>
         </div>
       </div>

@@ -11,8 +11,6 @@ class SongMaker extends Component {
       release_date: "",
       genre: "",
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleChange = (event) => {
     this.setState({
@@ -30,18 +28,16 @@ class SongMaker extends Component {
       genre: this.state.genre,
     };
     console.log(song);
-    this.props.addSong(song);
+    this.props.onAdd(song);
     this.setState(
       {
-      newTitle: this.state.newTitle,
-      newArtist: this.state.newArtist,
-      newAlbum: this.state.newAlbum,
-      newRelease_date: this.state.newRelease_date,
-      newGenre: this.state.newGenre,
-    },
-    console.log(this)
+        title: "",
+        artist: "",
+        album: "",
+        release_date: "",
+        genre: "",
+    })
     
-    );
     
   };
   render() {
@@ -53,7 +49,7 @@ class SongMaker extends Component {
             <h3>Add a New Song!!!</h3>
           </center>
           
-            <div onSubmit={this.handleSubmit} className="container">
+            <form onSubmit={this.handleSubmit} className="container">
               <div className="row col-align">
                 <div className="form-group">
                   <div className="col-md-4">
@@ -112,7 +108,7 @@ class SongMaker extends Component {
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
           
         </React.Fragment>
       </div>
