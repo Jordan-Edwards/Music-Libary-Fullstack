@@ -13,6 +13,7 @@ function MusicTable(props) {
             <td>{song.album}</td>
             <td>{song.release_date}</td>
             <td>{song.genre}</td>
+            <button onClick={() => props.delete(song.id)}>Delete</button>
           </tr>
         );
       })}

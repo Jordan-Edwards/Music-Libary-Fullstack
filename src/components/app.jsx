@@ -19,9 +19,11 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
+
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
+
   handleSubmit(event) {
     event.preventDefault();
     const song = {
@@ -48,7 +50,18 @@ class App extends Component {
       })
     );
   }
-
+  deleteSong(songId){
+    return axios.delete("http://127.0.0.1:8000/music/"  + songId);
+}
+   delete = (id) => {
+    axios.delete(`http://127.0.0.1:8000/music/${id}/`)        
+      .then(response => {
+      console.log(response);
+      console.log(response.data);      
+    })
+    console.log(this)
+    this.setState({})
+  }
   // // Add Song
   // addSong = (song) => {
   //   console.log(song);
@@ -76,7 +89,6 @@ class App extends Component {
   // const deleteSong= (id)=>{
   //   this.setState(songs.filter((song) => song.id !== id))
   // }
-
   render() {
     return (
       <div>
