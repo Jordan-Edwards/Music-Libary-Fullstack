@@ -30,14 +30,6 @@ class App extends Component {
     })
   );
   }
-  //delete button added / not yet functional//
-
-
-
-
-
-// ^^^^TypeError: props.delete is not a function//
-
 
   addSong = (data) => {
     console.log(data)
@@ -50,6 +42,14 @@ class App extends Component {
   deleteSong= (id)=>{
    axios.delete("http://127.0.0.1:8000/music/" + id + "/")
   }
+
+  filterSongs = (arrayOfSongs) =>{
+    console.log(arrayOfSongs)
+    this.setState({
+        songs: arrayOfSongs
+    })
+}
+
   render() {
     return (
       <div>
@@ -66,11 +66,9 @@ class App extends Component {
           </thead>
           <MusicTable songs={this.state.songs} deleteSong = {this.deleteSong}/>
         </table>
-        <div>
-          
-            <SongMaker onAdd={this.addSong} />
-         
-          <div><SearchBar/></div>
+        <div className="container-fluid">
+            <SongMaker onAdd={this.addSong}/>
+            <SearchBar search={this.state.songs} filterTrigger={this.filterSongs}/>
         </div>
       </div>
     );
