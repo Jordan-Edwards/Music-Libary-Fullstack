@@ -87,7 +87,7 @@ class SongMaker extends Component {
                     <label>Release Date:</label>
                     <input
                       className="form-control"
-                      type="text"
+                      type="date"
                       name="release_date"
                       value={this.state.release_date}
                       onChange={this.handleChange}

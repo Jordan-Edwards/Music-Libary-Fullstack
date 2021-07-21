@@ -40,7 +40,9 @@ class App extends Component {
 
   //Delete Song
   deleteSong= (id)=>{
-   axios.delete("http://127.0.0.1:8000/music/" + id + "/")
+   axios.delete("http://127.0.0.1:8000/music/" + id + "/").then((response) =>
+      this.getAllSongs()
+   )
   }
 
   filterSongs = (arrayOfSongs) =>{
@@ -53,22 +55,26 @@ class App extends Component {
   render() {
     return (
       <div>
-        <table className="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Song Name</th>
-              <th>Artist</th>
-              <th>Album</th>
-              <th>Release Date</th>
-              <th>Genre</th>
-            </tr>
-          </thead>
-          <MusicTable songs={this.state.songs} deleteSong = {this.deleteSong}/>
-        </table>
+        <div className="p-3 mb-2 bg-secondary table-wrapper-scroll-y my-custom-scrollbar">
+          <table className="table table-hover table-striped mb-0 table-bordered border-primary">
+            <thead>
+              <tr>
+                <th>Song Name</th>
+                <th>Artist</th>
+                <th>Album</th>
+                <th>Release Date</th>
+                <th>Genre</th>
+              </tr>
+            </thead>
+            <MusicTable songs={this.state.songs} deleteSong={this.deleteSong} />
+          </table>
+        </div>
         <div className="container-fluid">
-            <SongMaker onAdd={this.addSong}/>
-            <SearchBar search={this.state.songs} filterTrigger={this.filterSongs}/>
+          <SongMaker onAdd={this.addSong} />
+          <SearchBar
+            search={this.state.songs}
+            filterTrigger={this.filterSongs}
+          />
         </div>
       </div>
     );

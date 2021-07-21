@@ -1,4 +1,5 @@
 import React from "react";
+import './musictable.css'
 
 function MusicTable(props) {
   return (
@@ -7,7 +8,7 @@ function MusicTable(props) {
       {props.songs.map((song,index ) => {
         return (
           <tr key={index}>
-            <td>{song.id}</td>
+            
             <td>{song.title}</td>
             <td>{song.artist}</td>
             <td>{song.album}</td>
